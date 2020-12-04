@@ -24,12 +24,12 @@ speed-measure-plugin*.json
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+Frontend/.vscode/*
+Frontend/!.vscode/settings.json
+Frontend/!.vscode/tasks.json
+Frontend/!.vscode/launch.json
+Frontend/!.vscode/extensions.json
+Frontend/.history/*
 
 # misc
 /.sass-cache
@@ -45,3 +45,38 @@ testem.log
 .DS_Store
 Thumbs.db
 Frontend/node_modules
+
+
+Backend/HELP.md
+Backend/target/
+Backend/!.mvn/wrapper/maven-wrapper.jar
+Backend/!**/src/main/**/target/
+Backend/!**/src/test/**/target/
+
+### STS ###
+Backend/.apt_generated
+Backend/.classpath
+Backend/.factorypath
+Backend/.project
+Backend/.settings
+Backend/.springBeans
+Backend/.sts4-cache
+
+### IntelliJ IDEA ###
+Backend/.idea
+Backend/*.iws
+Backend/*.iml
+Backend/*.ipr
+
+### NetBeans ###
+Backend/nbproject/private/
+Backend/nbbuild/
+Backend/dist/
+Backend/nbdist/
+Backend/.nb-gradle/
+Backend/build/
+Backend/!**/src/main/**/build/
+Backend/!**/src/test/**/build/
+
+### VS Code ###
+Backend/.vscode/
