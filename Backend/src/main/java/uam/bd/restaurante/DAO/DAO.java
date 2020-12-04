@@ -1,11 +1,9 @@
 package uam.bd.restaurante.DAO;
 
 import java.awt.List;
-import java.util.Optional;
 
-public interface DAO<T> {
-	 // void update(T t, String[] params);
-
+public interface DAO<T> 
+{	
     List getAll() throws Exception;
 
     T getBy(int id) throws Exception;
