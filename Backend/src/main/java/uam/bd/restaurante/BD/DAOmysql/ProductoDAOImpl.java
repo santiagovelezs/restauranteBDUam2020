@@ -17,7 +17,7 @@ public class ProductoDAOImpl implements DAO<Producto>
 	}
 
 	@Override
-	public List getAll() throws Exception {
+	public List<Producto> getAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -29,9 +29,9 @@ public class ProductoDAOImpl implements DAO<Producto>
 	}
 
 	@Override
-	public String save(Producto t) throws Exception {
+	public boolean save(Producto t) throws Exception {
 		// TODO Auto-generated method stub
-		return "";
+		return false;
 	}
 
 	@Override

@@ -23,10 +23,10 @@ public class EmpleadoController
 	}
 	
 	@PostMapping(path="/empleado")
-	public String saveEmpleado(@RequestBody Empleado received) throws Exception
+	public boolean saveEmpleado(@RequestBody Empleado received) throws Exception
 	{
 		System.out.println("POST: "+received.getApellidos());
-		String save = empleadoDAO.save(received);
+		boolean save = empleadoDAO.save(received);
 		
 		return save;
 	}

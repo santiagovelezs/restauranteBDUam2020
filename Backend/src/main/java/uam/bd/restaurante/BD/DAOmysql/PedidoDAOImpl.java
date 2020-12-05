@@ -16,7 +16,7 @@ public class PedidoDAOImpl implements DAO_Foreign<Pedido>
 	}
 
 	@Override
-	public List getAll() throws Exception {
+	public List<Pedido> getAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,9 +28,9 @@ public class PedidoDAOImpl implements DAO_Foreign<Pedido>
 	}
 
 	@Override
-	public String save(Pedido t) throws Exception {
+	public boolean save(Pedido t) throws Exception {
 		// TODO Auto-generated method stub
-		return "";
+		return false;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public interface DAO<T>
 
     T getBy(String id) throws Exception;
 
-    String save(T t) throws Exception;
+    boolean save(T t) throws Exception;
 
     boolean update(T t) throws Exception;
 

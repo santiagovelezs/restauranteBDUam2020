@@ -55,7 +55,7 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public String save(Empleado t) throws Exception 
+	public boolean save(Empleado t) throws Exception 
 	{
 		PreparedStatement statement = connection
 				.prepareStatement("INSERT INTO empleado"
@@ -71,10 +71,8 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		int affectedRows = statement.executeUpdate();
 
 
-		if(affectedRows > 0)
-			return "Empleado Registrado";
+		return affectedRows > 0;
 		
-		return "Error";
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 	}
 
 	@Override
-	public String save(Usuario t) throws Exception 
+	public boolean save(Usuario t) throws Exception 
 	{
 		PreparedStatement statement = connection
 				.prepareStatement("INSERT INTO usuario(id_empleado, password)"
@@ -66,10 +66,7 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 
 		int affectedRows = statement.executeUpdate();
 
-		if(affectedRows > 0)
-			return "Usuario Registrado";
-		
-		return "Error";
+		return affectedRows > 0;
 	}
 
 	@Override

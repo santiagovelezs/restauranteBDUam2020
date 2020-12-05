@@ -24,26 +24,11 @@ public class UsuarioController
 	}
 	
 	@PostMapping(path="/usuario")
-	public String saveUsuario(@RequestBody Usuario received)
+	public boolean saveUsuario(@RequestBody Usuario received) throws Exception
 	{
-		System.out.println("POST: "+received.getPassword());
-		String save = "";
-		try 
-		{
-			save = usuarioDAO.save(received);
-		} 
-		catch (SQLIntegrityConstraintViolationException e) 
-		{
-			save = "No Existe empleado con la cédula "+received.getCedula();
-			//e.printStackTrace();
-		}
-		catch (Exception e) 
-		{
-			save = "Error: "+e.toString();
-			//e.printStackTrace();
-		}
+		System.out.println("POST: "+received.getPassword());	
+		return usuarioDAO.save(received);		
 		
-		return save;
 	}
 	
 	@GetMapping("/usuario")		

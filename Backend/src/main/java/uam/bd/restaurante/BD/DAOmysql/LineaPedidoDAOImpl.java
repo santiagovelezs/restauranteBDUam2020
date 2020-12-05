@@ -21,7 +21,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public List getAll() throws Exception {
+	public List<LineaPedido> getAll() throws Exception {
         List<LineaPedido> elements = new ArrayList<>();
         
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos_pedido");
@@ -54,7 +54,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public String save(LineaPedido t) throws Exception {
+	public boolean save(LineaPedido t) throws Exception {
 		PreparedStatement statement =
 	            connection.prepareStatement(
 	                    "INSERT INTO productos_pedido(id_pedido, id_producto, cantidad, valor_un) VALUES (?,?,?,?)", 
@@ -73,10 +73,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	        t.setIdPedido(generatedKeys.getInt(1));
 
 
-			if(affectedRows > 0)
-				return "Linea Registrada";
-			
-			return "Error";
+	        return affectedRows > 0;
 	}
 
 	@Override
