@@ -5,12 +5,14 @@ public class Producto {
 	private String codigo;
 	private String nombre;
 	private String descripcion;
+	private boolean isActive;
 	private float valor;
-	public Producto(String codigo, String nombre, String descripcion, float valor) {
+	public Producto(String codigo, String nombre, String descripcion, float valor, boolean isActive) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.valor = valor;
+		this.isActive= isActive;
 	}
 	public String getCodigo() {
 		return codigo;
@@ -36,6 +38,13 @@ public class Producto {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	
 	
 }
