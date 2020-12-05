@@ -9,8 +9,7 @@ public class Pedido {
      private String cliente;
      private int estado;
      private Empleado empleado;
-     private ArrayList<Producto> productos;
-     private ArrayList<Integer> cantidad;
+     private ArrayList<LineaPedido> productos;
      private float total;
      
      
@@ -21,7 +20,6 @@ public class Pedido {
 		this.estado = estado;
 		this.empleado = empleado;
 		this.productos = new ArrayList<>();
-		this.cantidad=new ArrayList<>();
 		this.total=total;
 	}
 	
@@ -56,33 +54,29 @@ public class Pedido {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-	public void aniadirProducto(Producto e,int cantidad) {
+	public void aniadirProducto(LineaPedido e) {
 		
-		this.cantidad.add(cantidad);
 		this.productos.add(e);
 	
 	}
-    public boolean eliminarProducto(Producto e) {
+    public boolean eliminarProducto(LineaPedido e) {
     	for(int i=0;i<productos.size();i++) {
     	
     	if(productos.get(i).equals(e)) {
     	this.productos.remove(i);
-    	this.cantidad.remove(i);
     	return true;
-    	}
+          }
     	
-    	}
+       }
     	return false;
     }
     
     public float getTotal() {
-    	Producto e=new Producto("","","", 0);
+    	
     	
     	for(int i=0;i<productos.size();i++) {
-    		e=productos.get(i);
-    		for(int k=0;i<cantidad.get(i);k++) {
-    		total+=e.getValor();		
-    		}
+    		  		
+    		total+=productos.get(i).getSubTotal();		    		
     	}
     	return total;
     }

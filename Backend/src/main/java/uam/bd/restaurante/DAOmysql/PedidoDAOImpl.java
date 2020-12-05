@@ -1,6 +1,6 @@
 package uam.bd.restaurante.DAOmysql;
 
-import java.awt.List;
+import java.util.List;
 import java.sql.Connection;
 
 import uam.bd.restaurante.DAO.DAO_Foreign;
