@@ -8,45 +8,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.Model.Empleado;
+import uam.bd.restaurante.BD.Model.Repartidor;
 
-public class EmpleadoDAOImpl implements DAO<Empleado>
-{
-	private final Connection connection;
+public class RepartidorDAOImpl implements DAO<Repartidor>{
+private final Connection connection;
 	
-	public EmpleadoDAOImpl(Connection connection)
+	public RepartidorDAOImpl(Connection connection)
 	{
 		this.connection = connection;
 	}
 
 	@Override
-	public List<Empleado> getAll() throws Exception
+	public List<Repartidor> getAll() throws Exception
 	{
-		List<Empleado> elements = new ArrayList<>();
+		List<Repartidor> elements = new ArrayList<>();
         
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM domiciliario");
         ResultSet resultSet = statement.executeQuery();
         
         while(resultSet.next())
         {
-        	Empleado empleado = createEmpleado(resultSet);        	          
-            elements.add(empleado);
+        	Repartidor repartidor = createRepartidor(resultSet);        	          
+            elements.add(repartidor);
         }
         
         return elements;
 	}
 
 	@Override
-	public Empleado getBy(String id) throws Exception 
+	public Repartidor getBy(String id) throws Exception 
 	{
-		PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado WHERE cedula = ?");
+		PreparedStatement statement = connection.prepareStatement("SELECT * FROM domiciliario WHERE cedula = ?");
 
 		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
 
 		if (resultSet.next()) 
 		{
-			return createEmpleado(resultSet);
+			return createRepartidor(resultSet);
 		} 
 		else 
 		{
@@ -55,10 +54,10 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean save(Empleado t) throws Exception 
+	public boolean save(Repartidor t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO empleado"
+				.prepareStatement("INSERT INTO domiciliario"
 						+ "(cedula, nombre, apellidos, telefono, email)"
 						+ " VALUES (?, ?, ?, ?, ?)");
 		
@@ -74,10 +73,10 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean update(Empleado t) throws Exception 
+	public boolean update(Repartidor t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
+				.prepareStatement("UPDATE domiciliario "
 						+ "SET nombre=?, apellidos=?, telefono=?, email=?"
 						+ " WHERE cedula=?");
 
@@ -91,10 +90,10 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean delete(Empleado t) throws Exception 
+	public boolean delete(Repartidor t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
+				.prepareStatement("UPDATE domiciliario "
 						+ "SET is_active=?"
 						+ " WHERE cedula=?");
 
@@ -104,9 +103,9 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		return statement.executeUpdate() > 0;
 	}
 	
-	private Empleado createEmpleado(ResultSet resultSet) throws SQLException
+	private Repartidor createRepartidor(ResultSet resultSet) throws SQLException
     {
-		Empleado empleado = new Empleado(
+		Repartidor repartidor = new Repartidor(
                 resultSet.getString("cedula"),
                 resultSet.getString("nombre"),
                 resultSet.getString("apellidos"),                
@@ -115,7 +114,6 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
                 resultSet.getString("telefono")
         );
 
-        return empleado;
+        return repartidor;
     }
-
 }

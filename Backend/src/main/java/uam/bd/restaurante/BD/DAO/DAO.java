@@ -6,7 +6,7 @@ public interface DAO<T>
 {	
     List getAll() throws Exception;
 
-    T getBy(int id) throws Exception;
+    T getBy(String id) throws Exception;
 
     boolean save(T t) throws Exception;
 

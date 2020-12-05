@@ -8,20 +8,20 @@ public class Pedido {
      private Date fecha;
      private String cliente;
      private int estado;
-     private Empleado empleado;
-     private ArrayList<Producto> productos;
-     private ArrayList<Integer> cantidad;
+     private String empleado;
+     private int idEnvio;
+     private ArrayList<LineaPedido> productos;
      private float total;
      
      
-	public Pedido(int numero, Date fecha, String cliente, int estado, Empleado empleado) {
+	public Pedido(int numero, Date fecha, String cliente, int estado, String empleado, int idEnvio ) {
 		this.numero = numero;
 		this.fecha = fecha;
 		this.cliente = cliente;
 		this.estado = estado;
 		this.empleado = empleado;
+		this.idEnvio= idEnvio;
 		this.productos = new ArrayList<>();
-		this.cantidad=new ArrayList<>();
 		this.total=total;
 	}
 	
@@ -50,24 +50,44 @@ public class Pedido {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	public Empleado getEmpleado() {
+	public String getEmpleado() {
 		return empleado;
 	}
-	public void setEmpleado(Empleado empleado) {
+	public void setEmpleado(String empleado) {
 		this.empleado = empleado;
 	}
-	public void aniadirProducto(Producto e,int cantidad) {
+	public void aniadirProducto(LineaPedido e) {
 		
-		this.cantidad.add(cantidad);
+		
 		this.productos.add(e);
 	
 	}
-    public boolean eliminarProducto(Producto e) {
+	
+    public int getIdEnvio() {
+		return idEnvio;
+	}
+
+
+	public void setIdEnvio(int idEnvio) {
+		this.idEnvio = idEnvio;
+	}
+
+
+	public ArrayList<LineaPedido> getProductos() {
+		return productos;
+	}
+
+
+	public void setProductos(ArrayList<LineaPedido> productos) {
+		this.productos = productos;
+	}
+
+
+	public boolean eliminarProducto(Producto e) {
     	for(int i=0;i<productos.size();i++) {
     	
     	if(productos.get(i).equals(e)) {
     	this.productos.remove(i);
-    	this.cantidad.remove(i);
     	return true;
     	}
     	
@@ -76,13 +96,10 @@ public class Pedido {
     }
     
     public float getTotal() {
-    	Producto e=new Producto("","","", 0);
+    	
     	
     	for(int i=0;i<productos.size();i++) {
-    		e=productos.get(i);
-    		for(int k=0;i<cantidad.get(i);k++) {
-    		total+=e.getValor();		
-    		}
+    		total+=productos.get(i).getSubTotal();
     	}
     	return total;
     }

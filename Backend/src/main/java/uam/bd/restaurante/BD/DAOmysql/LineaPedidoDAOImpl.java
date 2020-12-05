@@ -21,7 +21,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public List getAll() throws Exception {
+	public List<LineaPedido> getAll() throws Exception {
         List<LineaPedido> elements = new ArrayList<>();
         
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos_pedido");
@@ -38,10 +38,10 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public LineaPedido getBy(int id) throws Exception {
+	public LineaPedido getBy(String numero) throws Exception {
         PreparedStatement statement =
                 connection.prepareStatement("SELECT * FROM productos_pedido WHERE id_pedido = ?");
-
+             int id=Integer.parseInt(numero);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
@@ -91,14 +91,16 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	@Override
 	public boolean delete(LineaPedido t) throws Exception 
 	{
-		return false;
+		PreparedStatement statement = connection
+				.prepareStatement("DELETE FROM productos_pedido "
+						+ " WHERE id_pedido=?, id_producto=?");
+		statement.setInt(1,t.getIdPedido());
+		statement.setString(2, t.getIdProducto());		
+
+		return statement.executeUpdate() > 0;
 	}
 
-	@Override
-	public List<LineaPedido> getAllById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	 
 	 private LineaPedido createLineaPedido(ResultSet resultSet) throws SQLException
@@ -113,6 +115,12 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 
 	        return lineaPedido;
 	    }
+
+	@Override
+	public List<LineaPedido> getAllById(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

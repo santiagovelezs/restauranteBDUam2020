@@ -51,6 +51,7 @@ public class LineaPedido {
 	public String getIdProducto() {
 		return producto.getCodigo();
 	}
+	
 	@Override
     public String toString() {
         return "productos_pedido{" + "id_pedido=" + getIdPedido() + ", id_producto='" + producto.getCodigo() + ", cantidad='" +

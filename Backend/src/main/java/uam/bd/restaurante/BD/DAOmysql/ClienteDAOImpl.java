@@ -8,45 +8,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.Model.Empleado;
+import uam.bd.restaurante.BD.Model.Cliente;
 
-public class EmpleadoDAOImpl implements DAO<Empleado>
-{
-	private final Connection connection;
+
+public class ClienteDAOImpl implements DAO<Cliente>{
+private final Connection connection;
 	
-	public EmpleadoDAOImpl(Connection connection)
+	public ClienteDAOImpl(Connection connection)
 	{
 		this.connection = connection;
 	}
 
 	@Override
-	public List<Empleado> getAll() throws Exception
+	public List<Cliente> getAll() throws Exception
 	{
-		List<Empleado> elements = new ArrayList<>();
+		List<Cliente> elements = new ArrayList<>();
         
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente");
         ResultSet resultSet = statement.executeQuery();
         
         while(resultSet.next())
         {
-        	Empleado empleado = createEmpleado(resultSet);        	          
-            elements.add(empleado);
+        	Cliente cliente = createCliente(resultSet);        	          
+            elements.add(cliente);
         }
         
         return elements;
 	}
 
 	@Override
-	public Empleado getBy(String id) throws Exception 
+	public Cliente getBy(String id) throws Exception 
 	{
-		PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado WHERE cedula = ?");
+		PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente WHERE cedula = ?");
 
 		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
 
 		if (resultSet.next()) 
 		{
-			return createEmpleado(resultSet);
+			return createCliente(resultSet);
 		} 
 		else 
 		{
@@ -55,18 +55,19 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean save(Empleado t) throws Exception 
+	public boolean save(Cliente t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO empleado"
-						+ "(cedula, nombre, apellidos, telefono, email)"
-						+ " VALUES (?, ?, ?, ?, ?)");
+				.prepareStatement("INSERT INTO cliente"
+						+ "(cedula, nombre, apellidos, direccion, telefono, email)"
+						+ " VALUES (?, ?, ?, ?, ?, ?)");
 		
 		statement.setString(1, t.getCedula());
 		statement.setString(2, t.getNombre());
 		statement.setString(3, t.getApellido());
-		statement.setString(4, t.getTelefono());
-		statement.setString(5, t.getEmail());
+		statement.setString(4, t.getDireccion());
+		statement.setString(5, t.getTelefono());
+		statement.setString(6, t.getEmail());
 
 		int affectedRows = statement.executeUpdate();
 
@@ -74,27 +75,27 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean update(Empleado t) throws Exception 
+	public boolean update(Cliente t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
+				.prepareStatement("UPDATE cliente "
 						+ "SET nombre=?, apellidos=?, telefono=?, email=?"
 						+ " WHERE cedula=?");
-
+        
 		statement.setString(1, t.getNombre());		
 		statement.setString(2, t.getApellido());
 		statement.setString(3, t.getTelefono());
 		statement.setString(4, t.getEmail());
-		statement.setString(5, t.getCedula());
+		
 
 		return statement.executeUpdate() > 0;
 	}
 
 	@Override
-	public boolean delete(Empleado t) throws Exception 
+	public boolean delete(Cliente t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
+				.prepareStatement("UPDATE cliente "
 						+ "SET is_active=?"
 						+ " WHERE cedula=?");
 
@@ -104,18 +105,19 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		return statement.executeUpdate() > 0;
 	}
 	
-	private Empleado createEmpleado(ResultSet resultSet) throws SQLException
+	private Cliente createCliente(ResultSet resultSet) throws SQLException
     {
-		Empleado empleado = new Empleado(
+		Cliente cliente = new Cliente(
                 resultSet.getString("cedula"),
                 resultSet.getString("nombre"),
-                resultSet.getString("apellidos"),                
+                resultSet.getString("apellidos"), 
+                resultSet.getString("direccion"),
                 resultSet.getString("email"),
                 resultSet.getBoolean("is_active"),
                 resultSet.getString("telefono")
         );
 
-        return empleado;
+        return cliente;
     }
 
 }
