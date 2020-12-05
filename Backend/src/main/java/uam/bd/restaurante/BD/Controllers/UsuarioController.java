@@ -26,7 +26,7 @@ public class UsuarioController
 	}
 	
 	@PostMapping(path="/usuario")
-	public boolean saveUsuario(@RequestBody Usuario received) throws Exception
+	public boolean saveUsuario(@RequestBody Usuario received) 
 	{
 		System.out.println("POST: "+received.getPassword());	
 		try 

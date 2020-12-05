@@ -44,7 +44,7 @@ export class PanelUsuariosComponent implements OnInit
             },
             error =>{
               console.log(error)
-              this.msg = error.error.text
+              this.msg = error.error.message
             } 
           )
   }
