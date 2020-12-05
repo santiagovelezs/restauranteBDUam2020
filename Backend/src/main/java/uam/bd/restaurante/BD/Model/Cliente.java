@@ -1,11 +1,24 @@
-package uam.bd.restaurante.model;
+package uam.bd.restaurante.BD.Model;
 
-public class Repartidor extends Persona {
+public class Cliente extends Persona{
+	
+	private String direccion;
 
-	public Repartidor(String cedula, String nombre, String apellido, String email, String telefono) {
-		super(cedula, nombre, apellido, email, telefono);
-		
+	public Cliente(String cedula, String nombre, String apellido, String email, String telefono, boolean is_active, String direccion) {
+		super(cedula, nombre, apellido, email, telefono, is_active);
+		this.direccion=direccion;
 	}
+	
+	
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 
 	public String getCedula() {
 		return cedula;
@@ -38,6 +51,4 @@ public class Repartidor extends Persona {
 		this.telefono = telefono;
 	}
 
-	
-	
 }

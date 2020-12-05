@@ -1,6 +1,6 @@
-package uam.bd.restaurante.DAO;
+package uam.bd.restaurante.BD.DAO;
 
-import java.awt.List;
+import java.util.List;
 
 public interface DAO<T> 
 {	

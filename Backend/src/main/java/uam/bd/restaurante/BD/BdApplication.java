@@ -1,17 +1,36 @@
 package uam.bd.restaurante.BD;
 
+import java.sql.Connection;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import uam.bd.restaurante.model.Repartidor;
+import uam.bd.restaurante.BD.MysqlConnector.DBConnection;
 
 @SpringBootApplication
-public class BdApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(BdApplication.class, args);
-		Repartidor re=new Repartidor("esta es mi cedula", "este es mi nombre", "este es mi apellido", "este es mi email", "este es mi telefono");
-		System.out.println(re.getNombre()+re.getCedula());
+public class BdApplication 
+{
+	@Bean
+	public Connection jdbcConnection() 
+	{
+	    return DBConnection.getConnection();
 	}
-    
+	
+	public static void main(String[] args) 
+	{
+		SpringApplication.run(BdApplication.class, args);			
+	}    
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*");
+			}
+		};
+	}
 }

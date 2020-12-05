@@ -1,10 +1,10 @@
-package uam.bd.restaurante.DAOmysql;
+package uam.bd.restaurante.BD.DAOmysql;
 
-import java.awt.List;
+import java.util.List;
 import java.sql.Connection;
 
-import uam.bd.restaurante.DAO.DAO_Foreign;
-import uam.bd.restaurante.model.Pedido;
+import uam.bd.restaurante.BD.DAO.DAO_Foreign;
+import uam.bd.restaurante.BD.Model.Pedido;
 
 public class PedidoDAOImpl implements DAO_Foreign<Pedido>
 {

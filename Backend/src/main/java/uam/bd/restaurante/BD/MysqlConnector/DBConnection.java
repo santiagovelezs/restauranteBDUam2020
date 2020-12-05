@@ -1,4 +1,4 @@
-package uam.bd.restaurante.MysqlConnector;
+package uam.bd.restaurante.BD.MysqlConnector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,6 +24,7 @@ public class DBConnection
 			try 
 			{				
 				conn = DriverManager.getConnection(url, properties);
+				System.out.println("Connnn");
 			} 
 			catch (SQLException e)
 			{

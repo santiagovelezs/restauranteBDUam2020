@@ -1,25 +1,13 @@
-package uam.bd.restaurante.model;
+package uam.bd.restaurante.BD.Model;
 
-public class Cliente extends Persona{
-	
-	private String direccion;
+public class Empleado extends Persona 
+{
 
-	public Cliente(String cedula, String nombre, String apellido, String email, String telefono, String direccion) {
-		super(cedula, nombre, apellido, email, telefono);
-		this.direccion=direccion;
+	public Empleado(String cedula, String nombre, String apellido, String email, boolean is_active, String telefono) 
+	{
+		super(cedula, nombre, apellido, email, telefono, is_active);
 	}
 	
-	
-	public String getDireccion() {
-		return direccion;
-	}
-
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-
 	public String getCedula() {
 		return cedula;
 	}

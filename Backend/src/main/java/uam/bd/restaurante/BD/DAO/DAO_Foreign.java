@@ -1,4 +1,4 @@
-package uam.bd.restaurante.DAO;
+package uam.bd.restaurante.BD.DAO;
 
 import java.util.List;
 

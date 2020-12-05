@@ -1,4 +1,4 @@
-package uam.bd.restaurante.model;
+package uam.bd.restaurante.BD.Model;
 
 import java.util.ArrayList;
 
