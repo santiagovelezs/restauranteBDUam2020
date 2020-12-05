@@ -3,9 +3,9 @@ package uam.bd.restaurante.BD.Model;
 public class Empleado extends Persona 
 {
 
-	public Empleado(String cedula, String nombre, String apellido, String email, boolean is_active, String telefono) 
+	public Empleado(String cedula, String nombre, String apellidos, String email, String telefono, boolean is_active) 
 	{
-		super(cedula, nombre, apellido, email, telefono, is_active);
+		super(cedula, nombre, apellidos, email, telefono, is_active);
 	}
 	
 	public String getCedula() {
@@ -20,11 +20,11 @@ public class Empleado extends Persona
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellido() {
-		return apellido;
+	public String getApellidos() {
+		return apellidos;
 	}
 	public void setApellido(String apellido) {
-		this.apellido = apellido;
+		this.apellidos = apellido;
 	}
 	public String getEmail() {
 		return email;

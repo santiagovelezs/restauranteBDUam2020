@@ -7,13 +7,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewOrderComponent } from './components/pedidos/new-order/new-order.component';
 import { PanelPedidosComponent } from './components/pedidos/panel-pedidos/panel-pedidos.component';
 import { PanelClientesComponent } from './components/clientes/panel-clientes/panel-clientes.component';
+import { PanelEmpleadosComponent } from './components/empleados/panel-empleados/panel-empleados.component';
+import { PanelUsuariosComponent } from './components/usuarios/panel-usuarios/panel-usuarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewOrderComponent,
     PanelPedidosComponent,
-    PanelClientesComponent
+    PanelClientesComponent,
+    PanelEmpleadosComponent,
+    PanelUsuariosComponent
   ],
   imports: [
     BrowserModule,

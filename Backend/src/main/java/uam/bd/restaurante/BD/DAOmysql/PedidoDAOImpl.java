@@ -22,15 +22,15 @@ public class PedidoDAOImpl implements DAO_Foreign<Pedido>
 	}
 
 	@Override
-	public Pedido getBy(int id) throws Exception {
+	public Pedido getBy(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean save(Pedido t) throws Exception {
+	public String save(Pedido t) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		return "";
 	}
 
 	@Override

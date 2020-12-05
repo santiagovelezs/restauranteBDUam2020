@@ -2,8 +2,8 @@ package uam.bd.restaurante.BD.Model;
 
 public class Repartidor extends Persona {
 
-	public Repartidor(String cedula, String nombre, String apellido, String email, boolean is_active, String telefono) {
-		super(cedula, nombre, apellido, email, telefono, is_active);
+	public Repartidor(String cedula, String nombre, String apellidos, String email, boolean is_active, String telefono) {
+		super(cedula, nombre, apellidos, email, telefono, is_active);
 		
 	}
 
@@ -19,11 +19,11 @@ public class Repartidor extends Persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellido() {
-		return apellido;
+	public String getApellidos() {
+		return apellidos;
 	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 	public String getEmail() {
 		return email;

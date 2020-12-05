@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface DAO<T> 
 {	
-    List getAll() throws Exception;
+    List<T> getAll() throws Exception;
 
-    T getBy(int id) throws Exception;
+    T getBy(String id) throws Exception;
 
-    boolean save(T t) throws Exception;
+    String save(T t) throws Exception;
 
     boolean update(T t) throws Exception;
 

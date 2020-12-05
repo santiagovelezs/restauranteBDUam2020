@@ -37,11 +37,11 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public Empleado getBy(int id) throws Exception 
+	public Empleado getBy(String id) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado WHERE cedula = ?");
 
-		statement.setInt(1, id);
+		statement.setString(1, id);
 		ResultSet resultSet = statement.executeQuery();
 
 		if (resultSet.next()) 
@@ -55,7 +55,7 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean save(Empleado t) throws Exception 
+	public String save(Empleado t) throws Exception 
 	{
 		PreparedStatement statement = connection
 				.prepareStatement("INSERT INTO empleado"
@@ -64,13 +64,17 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		
 		statement.setString(1, t.getCedula());
 		statement.setString(2, t.getNombre());
-		statement.setString(3, t.getApellido());
+		statement.setString(3, t.getApellidos());
 		statement.setString(4, t.getTelefono());
 		statement.setString(5, t.getEmail());
 
 		int affectedRows = statement.executeUpdate();
 
-		return affectedRows > 0;
+
+		if(affectedRows > 0)
+			return "Empleado Registrado";
+		
+		return "Error";
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 						+ " WHERE cedula=?");
 
 		statement.setString(1, t.getNombre());		
-		statement.setString(2, t.getApellido());
+		statement.setString(2, t.getApellidos());
 		statement.setString(3, t.getTelefono());
 		statement.setString(4, t.getEmail());
 		statement.setString(5, t.getCedula());
@@ -111,8 +115,8 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
                 resultSet.getString("nombre"),
                 resultSet.getString("apellidos"),                
                 resultSet.getString("email"),
-                resultSet.getBoolean("is_active"),
-                resultSet.getString("telefono")
+                resultSet.getString("telefono"),
+                resultSet.getBoolean("is_active")                
         );
 
         return empleado;

@@ -4,8 +4,8 @@ public class Cliente extends Persona{
 	
 	private String direccion;
 
-	public Cliente(String cedula, String nombre, String apellido, String email, String telefono, boolean is_active, String direccion) {
-		super(cedula, nombre, apellido, email, telefono, is_active);
+	public Cliente(String cedula, String nombre, String apellidos, String email, String telefono, boolean is_active, String direccion) {
+		super(cedula, nombre, apellidos, email, telefono, is_active);
 		this.direccion=direccion;
 	}
 	
@@ -32,11 +32,11 @@ public class Cliente extends Persona{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellido() {
-		return apellido;
+	public String getApellidos() {
+		return apellidos;
 	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 	public String getEmail() {
 		return email;

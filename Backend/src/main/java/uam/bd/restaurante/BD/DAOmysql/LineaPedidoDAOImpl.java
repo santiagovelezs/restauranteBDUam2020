@@ -38,11 +38,11 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public LineaPedido getBy(int id) throws Exception {
+	public LineaPedido getBy(String id) throws Exception {
         PreparedStatement statement =
                 connection.prepareStatement("SELECT * FROM productos_pedido WHERE id_pedido = ?");
 
-            statement.setInt(1, id);
+            statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -54,7 +54,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	}
 
 	@Override
-	public boolean save(LineaPedido t) throws Exception {
+	public String save(LineaPedido t) throws Exception {
 		PreparedStatement statement =
 	            connection.prepareStatement(
 	                    "INSERT INTO productos_pedido(id_pedido, id_producto, cantidad, valor_un) VALUES (?,?,?,?)", 
@@ -72,7 +72,11 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>{
 	        generatedKeys.next();
 	        t.setIdPedido(generatedKeys.getInt(1));
 
-	        return affectedRows > 0;
+
+			if(affectedRows > 0)
+				return "Linea Registrada";
+			
+			return "Error";
 	}
 
 	@Override

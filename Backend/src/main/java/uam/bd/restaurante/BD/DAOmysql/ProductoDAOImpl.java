@@ -6,12 +6,12 @@ import java.util.List;
 import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.Model.Producto;
 
-public class ProductoDAOImp implements DAO<Producto>
+public class ProductoDAOImpl implements DAO<Producto>
 {
 
 	private final Connection connection;
 
-	public ProductoDAOImp(Connection connection) {
+	public ProductoDAOImpl(Connection connection) {
 		super();
 		this.connection = connection;
 	}
@@ -23,15 +23,15 @@ public class ProductoDAOImp implements DAO<Producto>
 	}
 
 	@Override
-	public Producto getBy(int id) throws Exception {
+	public Producto getBy(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean save(Producto t) throws Exception {
+	public String save(Producto t) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		return "";
 	}
 
 	@Override

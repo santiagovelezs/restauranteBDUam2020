@@ -1,5 +1,7 @@
 package uam.bd.restaurante.BD.Controllers;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,17 +23,18 @@ public class EmpleadoController
 	}
 	
 	@PostMapping(path="/empleado")
-	public boolean saveEmpleado(@RequestBody Empleado received) throws Exception
+	public String saveEmpleado(@RequestBody Empleado received) throws Exception
 	{
-		System.out.println("POST: "+received.getApellido());
-		boolean save = empleadoDAO.save(received);
+		System.out.println("POST: "+received.getApellidos());
+		String save = empleadoDAO.save(received);
 		
 		return save;
 	}
 	
-	@GetMapping("/")		
-	public String index()
+	@GetMapping("/empleado")		
+	public List<Empleado> get() throws Exception
 	{		
-		return "Welcome To the restaurant API";
+		List<Empleado> empleados = empleadoDAO.getAll();
+		return empleados;
 	}
 }
