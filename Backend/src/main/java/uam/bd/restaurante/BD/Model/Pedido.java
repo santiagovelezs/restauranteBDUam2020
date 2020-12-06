@@ -1,107 +1,106 @@
 package uam.bd.restaurante.BD.Model;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.sql.Timestamp;
 
-public class Pedido {
-     private int numero;
-     private Date fecha;
-     private String cliente;
-     private int estado;
-     private String empleado;
-     private int idEnvio;
-     private ArrayList<LineaPedido> productos;
-     private float total;
+public class Pedido 
+{	
+	private int numero;
      
+    private Timestamp fecha;
      
-	public Pedido(int numero, Date fecha, String cliente, int estado, String empleado, int idEnvio ) {
+    private Cliente cliente;    
+     
+    private Usuario usuario;
+     
+    private Estado estado;
+    
+    private Envio envio;
+     
+    private ArrayList<LineaPedido> productos;        
+     
+	public Pedido(int numero, Timestamp fecha, Cliente cliente, Usuario usuario)
+	{
 		this.numero = numero;
 		this.fecha = fecha;
 		this.cliente = cliente;
-		this.estado = estado;
-		this.empleado = empleado;
-		this.idEnvio= idEnvio;
-		this.productos = new ArrayList<>();
-		this.total=total;
-	}
+		this.usuario = usuario;
+		this.productos = new ArrayList<LineaPedido>();
+	}	
 	
-	
-	public int getNumero() {
+	public int getNumero() 
+	{
 		return numero;
 	}
-	public void setNumero(int numero) {
+	
+	public void setNumero(int numero) 
+	{
 		this.numero = numero;
 	}
-	public Date getFecha() {
+	
+	public Timestamp getFecha() 
+	{
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	
+	public void setFecha(Timestamp fecha) 
+	{
 		this.fecha = fecha;
 	}
-	public String getCliente() {
+	
+	public Cliente getCliente() 
+	{
 		return cliente;
 	}
-	public void setCliente(String cliente) {
+	
+	public void setCliente(Cliente cliente) 
+	{
 		this.cliente = cliente;
 	}
-	public int getEstado() {
+	
+	public Estado getEstado() 
+	{
 		return estado;
 	}
-	public void setEstado(int estado) {
+	
+	public void setEstado(Estado estado) 
+	{
 		this.estado = estado;
 	}
-	public String getEmpleado() {
-		return empleado;
-	}
-	public void setEmpleado(String empleado) {
-		this.empleado = empleado;
-	}
-	public void aniadirProducto(LineaPedido e) {
-		
-		
-		this.productos.add(e);
 	
+	public Usuario getUsuario() 
+	{
+		return usuario;
 	}
 	
-    public int getIdEnvio() {
-		return idEnvio;
+	public void setEmpleado(Usuario empleado) 
+	{
+		this.usuario = empleado;
+	}
+	
+	public void adicionarProducto(LineaPedido e)
+	{		
+		this.productos.add(e);	
+	}
+	
+    public Envio getEnvio() 
+    {
+		return envio;
 	}
 
-
-	public void setIdEnvio(int idEnvio) {
-		this.idEnvio = idEnvio;
+	public void setEnvio(Envio envio) 
+	{
+		this.envio = envio;
 	}
 
-
-	public ArrayList<LineaPedido> getProductos() {
+	public ArrayList<LineaPedido> getProductos() 
+	{
 		return productos;
-	}
-
-
-	public void setProductos(ArrayList<LineaPedido> productos) {
-		this.productos = productos;
-	}
-
-
-	public boolean eliminarProducto(Producto e) {
-    	for(int i=0;i<productos.size();i++) {
-    	
-    	if(productos.get(i).equals(e)) {
-    	this.productos.remove(i);
-    	return true;
-    	}
-    	
-    	}
-    	return false;
-    }
+	}		
     
-    public float getTotal() {
-    	
-    	
-    	for(int i=0;i<productos.size();i++) {
-    		total+=productos.get(i).getSubTotal();
-    	}
-    	return total;
+    public float getTotal() 
+    {  	
+    	return 0;
     }
 	
 }

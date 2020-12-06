@@ -11,8 +11,9 @@ import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.Model.Cliente;
 
 
-public class ClienteDAOImpl implements DAO<Cliente>{
-private final Connection connection;
+public class ClienteDAOImpl implements DAO<Cliente>
+{
+	private final Connection connection;
 	
 	public ClienteDAOImpl(Connection connection)
 	{

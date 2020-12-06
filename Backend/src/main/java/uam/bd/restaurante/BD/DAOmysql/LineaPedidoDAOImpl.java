@@ -3,22 +3,25 @@ package uam.bd.restaurante.BD.DAOmysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import uam.bd.restaurante.BD.DAO.DAO_Foreign;
 import uam.bd.restaurante.BD.Model.LineaPedido;
+import uam.bd.restaurante.BD.Model.Producto;
 
 public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 {      
 	private  final Connection connection;
+	
+	private ProductoDAOImpl productoDAO;
 
 	public LineaPedidoDAOImpl(Connection connection) 
 	{
 		super();
 		this.connection = connection;
+		this.productoDAO = new ProductoDAOImpl(connection);
 	}
 
 	@Override
@@ -66,7 +69,7 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 		statement.setInt(1, t.getIdPedido());
 		statement.setString(2, t.getIdProducto());
 		statement.setInt(3, t.getCantidad());
-		statement.setFloat(4, t.getValorUnit());
+		statement.setFloat(4, t.getValorUn());
 
 		int affectedRows = statement.executeUpdate();
 
@@ -81,11 +84,11 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 	public boolean update(LineaPedido t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE productos_pedido  id_producto=?, cantidad=?, valor_un=? WHERE id_pedido=?");
+				.prepareStatement("UPDATE productos_pedido SET id_producto=?, cantidad=?, valor_un=? WHERE id_pedido=?");
 
 		statement.setString(2, t.getIdProducto());
 		statement.setInt(3, t.getCantidad());
-		statement.setFloat(4, t.getValorUnit());
+		statement.setFloat(4, t.getValorUn());
 
 		return statement.executeUpdate() > 0;
 	}
@@ -103,14 +106,16 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 		return null;
 	}
 	 
-	private LineaPedido createLineaPedido(ResultSet resultSet) throws SQLException 
+	private LineaPedido createLineaPedido(ResultSet resultSet) throws Exception 
 	{
+		String idProducto = resultSet.getString("id_producto");
+		Producto producto = productoDAO.getBy(idProducto);
+		
 		LineaPedido lineaPedido = new LineaPedido(
-				resultSet.getInt("id_pedido"), 
-				resultSet.getFloat("valor_un"),
-				resultSet.getString("id_producto"), 
-				resultSet.getInt("cantidad")
-
+				resultSet.getInt("id_pedido"), 				
+				producto,
+				resultSet.getInt("cantidad"),
+				resultSet.getFloat("valor_un")				
 		);
 
 		return lineaPedido;

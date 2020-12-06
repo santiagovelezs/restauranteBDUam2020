@@ -8,35 +8,53 @@ public class Empleado extends Persona
 		super(cedula, nombre, apellidos, email, telefono, is_active);
 	}
 	
-	public String getCedula() {
+	public String getCedula() 
+	{
 		return cedula;
 	}
-	public void setCedula(String cedula) {
+	
+	public void setCedula(String cedula) 
+	{
 		this.cedula = cedula;
 	}
-	public String getNombre() {
+	
+	public String getNombre()
+	{
 		return nombre;
 	}
-	public void setNombre(String nombre) {
+	
+	public void setNombre(String nombre) 
+	{
 		this.nombre = nombre;
 	}
-	public String getApellidos() {
+	
+	public String getApellidos() 
+	{
 		return apellidos;
 	}
-	public void setApellido(String apellido) {
+	
+	public void setApellido(String apellido)
+	{
 		this.apellidos = apellido;
 	}
-	public String getEmail() {
+	
+	public String getEmail() 
+	{
 		return email;
 	}
-	public void setEmail(String email) {
+	
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
-	public String getTelefono() {
+	
+	public String getTelefono() 
+	{
 		return telefono;
 	}
-	public void setTelefono(String telefono) {
+	
+	public void setTelefono(String telefono) 
+	{
 		this.telefono = telefono;
 	}
-
 }

@@ -2,10 +2,15 @@ package uam.bd.restaurante.BD.Controllers;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.DAOmysql.EmpleadoDAOImpl;
@@ -22,19 +27,61 @@ public class EmpleadoController
 		empleadoDAO = new EmpleadoDAOImpl(DBConnection.getConnection());
 	}
 	
-	@PostMapping(path="/empleado")
-	public boolean saveEmpleado(@RequestBody Empleado received) throws Exception
-	{
-		System.out.println("POST: "+received.getApellidos());
-		boolean save = empleadoDAO.save(received);
-		
-		return save;
+	@PostMapping(path="/empleados")
+	public boolean saveEmpleado(@RequestBody Empleado t) 
+	{			
+		try 
+		{
+			return empleadoDAO.save(t);
+		} 
+		catch (DataIntegrityViolationException e) 
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Empleado Ya Existe", e);
+		} 
+		catch (Exception e) 
+		{
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
+		}
+	}	
+	
+	@GetMapping("/empleados")		
+	public List<Empleado> get()
+	{		
+		List<Empleado> empleados;
+		try 
+		{
+			empleados = empleadoDAO.getAll();
+			return empleados;
+		} 
+		catch (Exception e) 
+		{			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
+		}		
 	}
 	
-	@GetMapping("/empleado")		
-	public List<Empleado> get() throws Exception
-	{		
-		List<Empleado> empleados = empleadoDAO.getAll();
-		return empleados;
+	@DeleteMapping("/empleados")
+	public boolean deleteEmpleado(@RequestBody Empleado t)
+	{
+		try 
+		{
+			return empleadoDAO.delete(t);
+		} 
+		catch (Exception e) 
+		{
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
+		}
+	}
+	
+	@PutMapping("/empleados")
+	public boolean updateEmpleado(@RequestBody Empleado t)
+	{
+		try
+		{
+			return empleadoDAO.update(t);
+		}
+		catch(Exception e)
+		{
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
+		}
 	}
 }

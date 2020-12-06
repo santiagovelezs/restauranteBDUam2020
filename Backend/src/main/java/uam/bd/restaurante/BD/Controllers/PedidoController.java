@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.DAOmysql.UsuarioDAOImpl;
-import uam.bd.restaurante.BD.Model.Usuario;
+import uam.bd.restaurante.BD.DAO.DAO_Foreign;
+import uam.bd.restaurante.BD.DAOmysql.PedidoDAOImpl;
+import uam.bd.restaurante.BD.Model.Pedido;
 import uam.bd.restaurante.BD.MysqlConnector.DBConnection;
 
 @RestController
-public class UsuarioController 
+public class PedidoController 
 {
-	private DAO<Usuario> usuarioDAO;
+	private DAO_Foreign<Pedido> pedidoDAO;
 	
-	public UsuarioController()
+	public PedidoController()
 	{
-		usuarioDAO = new UsuarioDAOImpl(DBConnection.getConnection());
+		pedidoDAO = new PedidoDAOImpl(DBConnection.getConnection());
 	}
 	
-	@PostMapping(path="/usuarios")
-	public boolean saveUsuario(@RequestBody Usuario t) 
+	@PostMapping(path="/pedido")
+	public boolean savePedido(@RequestBody Pedido t) 
 	{			
 		try 
 		{
-			return usuarioDAO.save(t);
+			return pedidoDAO.save(t);
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Usuario Ya Existe", e);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Pedido Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{
@@ -44,14 +44,14 @@ public class UsuarioController
 		}
 	}	
 	
-	@GetMapping("/usuarios")		
-	public List<Usuario> get()
+	@GetMapping("/pedido")		
+	public List<Pedido> get()
 	{		
-		List<Usuario> usuarios;
+		List<Pedido> pedidos;
 		try 
 		{
-			usuarios = usuarioDAO.getAll();
-			return usuarios;
+			pedidos = pedidoDAO.getAll();
+			return pedidos;
 		} 
 		catch (Exception e) 
 		{			
@@ -59,12 +59,12 @@ public class UsuarioController
 		}		
 	}
 	
-	@DeleteMapping("/usuarios")
-	public boolean deleteUsuario(@RequestBody Usuario t)
+	@DeleteMapping("/pedido")
+	public boolean deletePedido(@RequestBody Pedido t)
 	{
 		try 
 		{
-			return usuarioDAO.delete(t);
+			return pedidoDAO.delete(t);
 		} 
 		catch (Exception e) 
 		{
@@ -72,12 +72,12 @@ public class UsuarioController
 		}
 	}
 	
-	@PutMapping("/usuarios")
-	public boolean updateUsuario(@RequestBody Usuario t)
+	@PutMapping("/pedido")
+	public boolean updatePedido(@RequestBody Pedido t)
 	{
 		try
 		{
-			return usuarioDAO.update(t);
+			return pedidoDAO.update(t);
 		}
 		catch(Exception e)
 		{

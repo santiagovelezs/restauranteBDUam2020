@@ -73,8 +73,7 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 	public boolean update(Usuario t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE usuario "
-								+ "SET password=? "
+				.prepareStatement("UPDATE usuario SET password=? "
 								+ "WHERE id_empleado=?");
 
 		statement.setString(1, t.getPassword());		

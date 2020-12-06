@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.DAOmysql.UsuarioDAOImpl;
-import uam.bd.restaurante.BD.Model.Usuario;
+import uam.bd.restaurante.BD.DAO.DAO_Foreign;
+import uam.bd.restaurante.BD.DAOmysql.EnvioDAOImpl;
+import uam.bd.restaurante.BD.Model.Envio;
 import uam.bd.restaurante.BD.MysqlConnector.DBConnection;
 
 @RestController
-public class UsuarioController 
+public class EnvioController 
 {
-	private DAO<Usuario> usuarioDAO;
+	private DAO_Foreign<Envio> envioDAO;
 	
-	public UsuarioController()
+	public EnvioController()
 	{
-		usuarioDAO = new UsuarioDAOImpl(DBConnection.getConnection());
+		envioDAO = new EnvioDAOImpl(DBConnection.getConnection());
 	}
 	
-	@PostMapping(path="/usuarios")
-	public boolean saveUsuario(@RequestBody Usuario t) 
+	@PostMapping(path="/envios")
+	public boolean savePedido(@RequestBody Envio t) 
 	{			
 		try 
 		{
-			return usuarioDAO.save(t);
+			return envioDAO.save(t);
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Usuario Ya Existe", e);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Envio Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{
@@ -44,14 +44,14 @@ public class UsuarioController
 		}
 	}	
 	
-	@GetMapping("/usuarios")		
-	public List<Usuario> get()
+	@GetMapping("/envios")		
+	public List<Envio> get()
 	{		
-		List<Usuario> usuarios;
+		List<Envio> envios;
 		try 
 		{
-			usuarios = usuarioDAO.getAll();
-			return usuarios;
+			envios = envioDAO.getAll();
+			return envios;
 		} 
 		catch (Exception e) 
 		{			
@@ -59,12 +59,12 @@ public class UsuarioController
 		}		
 	}
 	
-	@DeleteMapping("/usuarios")
-	public boolean deleteUsuario(@RequestBody Usuario t)
+	@DeleteMapping("/envios")
+	public boolean deletePedido(@RequestBody Envio t)
 	{
 		try 
 		{
-			return usuarioDAO.delete(t);
+			return envioDAO.delete(t);
 		} 
 		catch (Exception e) 
 		{
@@ -72,12 +72,12 @@ public class UsuarioController
 		}
 	}
 	
-	@PutMapping("/usuarios")
-	public boolean updateUsuario(@RequestBody Usuario t)
+	@PutMapping("/envios")
+	public boolean updatePedido(@RequestBody Envio t)
 	{
 		try
 		{
-			return usuarioDAO.update(t);
+			return envioDAO.update(t);
 		}
 		catch(Exception e)
 		{

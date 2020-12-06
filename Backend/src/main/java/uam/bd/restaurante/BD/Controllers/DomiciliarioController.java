@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.DAOmysql.UsuarioDAOImpl;
-import uam.bd.restaurante.BD.Model.Usuario;
+import uam.bd.restaurante.BD.DAOmysql.DomiciliarioDAOImpl;
+import uam.bd.restaurante.BD.Model.Domiciliario;
 import uam.bd.restaurante.BD.MysqlConnector.DBConnection;
 
 @RestController
-public class UsuarioController 
+public class DomiciliarioController 
 {
-	private DAO<Usuario> usuarioDAO;
+	private DAO<Domiciliario> domiciliarioDAO;
 	
-	public UsuarioController()
+	public DomiciliarioController()
 	{
-		usuarioDAO = new UsuarioDAOImpl(DBConnection.getConnection());
+		domiciliarioDAO = new DomiciliarioDAOImpl(DBConnection.getConnection());
 	}
 	
-	@PostMapping(path="/usuarios")
-	public boolean saveUsuario(@RequestBody Usuario t) 
+	@PostMapping(path="/domiciliarios")
+	public boolean saveDomiciliario(@RequestBody Domiciliario t) 
 	{			
 		try 
 		{
-			return usuarioDAO.save(t);
+			return domiciliarioDAO.save(t);
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Usuario Ya Existe", e);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Domiciliario Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{
@@ -44,14 +44,14 @@ public class UsuarioController
 		}
 	}	
 	
-	@GetMapping("/usuarios")		
-	public List<Usuario> get()
+	@GetMapping("/domiciliarios")		
+	public List<Domiciliario> get()
 	{		
-		List<Usuario> usuarios;
+		List<Domiciliario> domiciliarios;
 		try 
 		{
-			usuarios = usuarioDAO.getAll();
-			return usuarios;
+			domiciliarios = domiciliarioDAO.getAll();
+			return domiciliarios;
 		} 
 		catch (Exception e) 
 		{			
@@ -59,12 +59,12 @@ public class UsuarioController
 		}		
 	}
 	
-	@DeleteMapping("/usuarios")
-	public boolean deleteUsuario(@RequestBody Usuario t)
+	@DeleteMapping("/domiciliarios")
+	public boolean deleteDomiciliario(@RequestBody Domiciliario t)
 	{
 		try 
 		{
-			return usuarioDAO.delete(t);
+			return domiciliarioDAO.delete(t);
 		} 
 		catch (Exception e) 
 		{
@@ -72,12 +72,12 @@ public class UsuarioController
 		}
 	}
 	
-	@PutMapping("/usuarios")
-	public boolean updateUsuario(@RequestBody Usuario t)
+	@PutMapping("/domiciliarios")
+	public boolean updateDomiciliario(@RequestBody Domiciliario t)
 	{
 		try
 		{
-			return usuarioDAO.update(t);
+			return domiciliarioDAO.update(t);
 		}
 		catch(Exception e)
 		{

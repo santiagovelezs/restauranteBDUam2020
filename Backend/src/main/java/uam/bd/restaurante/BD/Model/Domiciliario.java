@@ -1,8 +1,8 @@
 package uam.bd.restaurante.BD.Model;
 
-public class Repartidor extends Persona 
+public class Domiciliario extends Persona 
 {	
-	public Repartidor(String cedula, String nombre, String apellidos, String email, boolean is_active, String telefono) 
+	public Domiciliario(String cedula, String nombre, String apellidos, String email, boolean is_active, String telefono) 
 	{
 		super(cedula, nombre, apellidos, email, telefono, is_active);		
 	}

@@ -8,28 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uam.bd.restaurante.BD.DAO.DAO;
-import uam.bd.restaurante.BD.Model.Repartidor;
+import uam.bd.restaurante.BD.Model.Domiciliario;
 
-public class RepartidorDAOImpl implements DAO<Repartidor>
+public class DomiciliarioDAOImpl implements DAO<Domiciliario>
 {
 	private final Connection connection;
 	
-	public RepartidorDAOImpl(Connection connection)
+	public DomiciliarioDAOImpl(Connection connection)
 	{
 		this.connection = connection;
 	}
 
 	@Override
-	public List<Repartidor> getAll() throws Exception
+	public List<Domiciliario> getAll() throws Exception
 	{
-		List<Repartidor> elements = new ArrayList<>();
+		List<Domiciliario> elements = new ArrayList<>();
         
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM domiciliario");
         ResultSet resultSet = statement.executeQuery();
         
         while(resultSet.next())
         {
-        	Repartidor repartidor = createRepartidor(resultSet);        	          
+        	Domiciliario repartidor = createDomiciliario(resultSet);        	          
             elements.add(repartidor);
         }
         
@@ -37,7 +37,7 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 	}
 
 	@Override
-	public Repartidor getBy(String id) throws Exception 
+	public Domiciliario getBy(String id) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("SELECT * FROM domiciliario WHERE cedula = ?");
 
@@ -46,7 +46,7 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 
 		if (resultSet.next()) 
 		{
-			return createRepartidor(resultSet);
+			return createDomiciliario(resultSet);
 		} 
 		else 
 		{
@@ -55,7 +55,7 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 	}
 
 	@Override
-	public boolean save(Repartidor t) throws Exception 
+	public boolean save(Domiciliario t) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO domiciliario(cedula, nombre, apellidos, telefono, email)"
 																+ " VALUES (?, ?, ?, ?, ?)");
@@ -72,7 +72,7 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 	}
 
 	@Override
-	public boolean update(Repartidor t) throws Exception 
+	public boolean update(Domiciliario t) throws Exception 
 	{
 		PreparedStatement statement = connection
 				.prepareStatement("UPDATE domiciliario SET nombre=?, apellidos=?, telefono=?, email=?"
@@ -88,7 +88,7 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 	}
 
 	@Override
-	public boolean delete(Repartidor t) throws Exception 
+	public boolean delete(Domiciliario t) throws Exception 
 	{
 		PreparedStatement statement = connection
 				.prepareStatement("UPDATE domiciliario "
@@ -101,9 +101,9 @@ public class RepartidorDAOImpl implements DAO<Repartidor>
 		return statement.executeUpdate() > 0;
 	}
 	
-	private Repartidor createRepartidor(ResultSet resultSet) throws SQLException
+	private Domiciliario createDomiciliario(ResultSet resultSet) throws SQLException
     {
-		Repartidor repartidor = new Repartidor(
+		Domiciliario repartidor = new Domiciliario(
                 resultSet.getString("cedula"),
                 resultSet.getString("nombre"),
                 resultSet.getString("apellidos"),                
