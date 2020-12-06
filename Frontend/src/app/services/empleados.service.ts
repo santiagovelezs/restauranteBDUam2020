@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class EmpleadosService 
 {
 
-  private URL_API = "http://localhost:8080/empleado"
+  private URL_API = "http://localhost:8080/empleados"
 
   constructor(private http: HttpClient) { }
 

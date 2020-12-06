@@ -72,7 +72,7 @@ public class PedidoDAOImpl implements DAO_Foreign<Pedido>
 
 	@Override
 	public int save(Pedido t) throws Exception 
-	{
+	{		
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO pedido(cliente, usuario, estado)"
 																+ " VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);		
 				

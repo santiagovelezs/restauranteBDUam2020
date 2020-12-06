@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.Model.Usuario;
@@ -14,9 +15,12 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 {
 	private final Connection connection;
 	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public UsuarioDAOImpl(Connection connection)
 	{
 		this.connection = connection;
+		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	}
 
 	@Override

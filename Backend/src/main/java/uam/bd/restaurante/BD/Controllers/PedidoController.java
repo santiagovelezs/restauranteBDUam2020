@@ -30,7 +30,7 @@ public class PedidoController
 	public PedidoController()
 	{
 		pedidoDAO = new PedidoDAOImpl(DBConnection.getConnection());
-		lineaPedidoDAO = new LineaPedidoDAOImpl(DBConnection.getConnection());
+		lineaPedidoDAO = new LineaPedidoDAOImpl(DBConnection.getConnection());		
 	}	
 	
 	@PostMapping(path="/pedido")
@@ -38,6 +38,7 @@ public class PedidoController
 	{			
 		try 
 		{
+			DBConnection.disableAutoCommit();
 			int idPedido = pedidoDAO.save(t);
 			ArrayList<LineaPedido> lineas = t.getProductos();
 			int affectedRows = 0;			
@@ -49,16 +50,19 @@ public class PedidoController
 					affectedRows += lineaPedidoDAO.save(linea);
 				}
 			}
+			DBConnection.commit();
 			return affectedRows == lineas.size();
 		} 
 		catch (DataIntegrityViolationException e) 
 		{			
 			e.printStackTrace();
+			DBConnection.rollback();
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Pedido Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{			
 			e.printStackTrace();
+			DBConnection.rollback();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
 		}
 	}	

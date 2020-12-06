@@ -33,6 +33,42 @@ public class DBConnection
 		}
 		return conn;
 	}
+	
+	public static void disableAutoCommit()
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+		} 
+		catch (SQLException e) 
+		{			
+			e.printStackTrace();
+		}
+	}
+	
+	public static void commit()
+	{
+		try 
+		{
+			conn.commit();
+		} 
+		catch (SQLException e) 
+		{			
+			e.printStackTrace();
+		}
+	}
+	
+	public static void rollback()
+	{
+		try 
+		{
+			conn.rollback();
+		} 
+		catch (SQLException e) 
+		{			
+			e.printStackTrace();
+		}
+	}
 
 	public static void closeConnection() 
 	{

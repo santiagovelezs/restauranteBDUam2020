@@ -14,5 +14,10 @@ public class Usuario extends Empleado
 	{
 		return this.password;
 	}
+	
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
 
 }
