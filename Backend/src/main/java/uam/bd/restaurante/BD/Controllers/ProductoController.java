@@ -32,14 +32,16 @@ public class ProductoController
 	{			
 		try 
 		{
-			return productoDAO.save(t);
+			return productoDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
+			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Producto Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{
+			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
 		}
 	}	
@@ -64,7 +66,7 @@ public class ProductoController
 	{
 		try 
 		{
-			return productoDAO.delete(t);
+			return productoDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +79,7 @@ public class ProductoController
 	{
 		try
 		{
-			return productoDAO.update(t);
+			return productoDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{

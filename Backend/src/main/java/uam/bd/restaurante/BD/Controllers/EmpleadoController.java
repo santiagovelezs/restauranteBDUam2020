@@ -32,7 +32,7 @@ public class EmpleadoController
 	{			
 		try 
 		{
-			return empleadoDAO.save(t);
+			return empleadoDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
@@ -64,7 +64,7 @@ public class EmpleadoController
 	{
 		try 
 		{
-			return empleadoDAO.delete(t);
+			return empleadoDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +77,7 @@ public class EmpleadoController
 	{
 		try
 		{
-			return empleadoDAO.update(t);
+			return empleadoDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{

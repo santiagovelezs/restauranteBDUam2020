@@ -12,6 +12,11 @@ public class Producto
 	
 	private float valor;
 	
+	public Producto()
+	{
+		
+	}
+	
 	public Producto(String codigo, String nombre, String descripcion, float valor, boolean isActive)
 	{
 		this.codigo = codigo;
@@ -19,6 +24,11 @@ public class Producto
 		this.descripcion = descripcion;
 		this.valor = valor;
 		this.isActive= isActive;
+	}
+	
+	public Producto(String codigo)
+	{
+		this.codigo = codigo;
 	}
 	
 	public String getCodigo() {
@@ -68,4 +78,10 @@ public class Producto
 	{
 		this.isActive = isActive;
 	}	
+	
+	@Override
+	public String toString() 
+	{
+		return "\nCodigo: "+this.getCodigo()+"\nNombre : "+this.getNombre()+"\nValor: "+this.getValor();
+	}
 }

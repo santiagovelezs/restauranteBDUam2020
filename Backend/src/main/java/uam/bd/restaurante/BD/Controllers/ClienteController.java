@@ -32,11 +32,11 @@ public class ClienteController
 	{			
 		try 
 		{
-			return clienteDAO.save(t);
+			return clienteDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Empleado Ya Existe", e);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Este Cliente Ya Existe", e);
 		} 
 		catch (Exception e) 
 		{
@@ -64,7 +64,7 @@ public class ClienteController
 	{
 		try 
 		{
-			return clienteDAO.delete(t);
+			return clienteDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +77,7 @@ public class ClienteController
 	{
 		try
 		{
-			return clienteDAO.update(t);
+			return clienteDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{

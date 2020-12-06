@@ -32,7 +32,7 @@ public class DomiciliarioController
 	{			
 		try 
 		{
-			return domiciliarioDAO.save(t);
+			return domiciliarioDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
@@ -64,7 +64,7 @@ public class DomiciliarioController
 	{
 		try 
 		{
-			return domiciliarioDAO.delete(t);
+			return domiciliarioDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +77,7 @@ public class DomiciliarioController
 	{
 		try
 		{
-			return domiciliarioDAO.update(t);
+			return domiciliarioDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{

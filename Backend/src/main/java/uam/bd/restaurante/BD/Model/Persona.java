@@ -17,5 +17,10 @@ public abstract class Persona
 		this.email = email;
 		this.telefono = telefono;
 		this.is_active = is_active;
-	}	
+	}
+	
+	public Persona(String cedula)
+	{
+		this.cedula = cedula;
+	}
 }

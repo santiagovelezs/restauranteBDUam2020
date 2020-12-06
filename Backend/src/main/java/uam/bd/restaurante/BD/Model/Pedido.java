@@ -19,12 +19,13 @@ public class Pedido
      
     private ArrayList<LineaPedido> productos;        
      
-	public Pedido(int numero, Timestamp fecha, Cliente cliente, Usuario usuario)
+	public Pedido(int numero, Timestamp fecha, Cliente cliente, Usuario usuario, Estado estado)
 	{
 		this.numero = numero;
 		this.fecha = fecha;
 		this.cliente = cliente;
 		this.usuario = usuario;
+		this.estado = estado;
 		this.productos = new ArrayList<LineaPedido>();
 	}	
 	

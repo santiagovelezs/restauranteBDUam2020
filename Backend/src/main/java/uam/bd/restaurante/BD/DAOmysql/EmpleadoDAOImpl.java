@@ -55,12 +55,11 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 	}
 
 	@Override
-	public boolean save(Empleado t) throws Exception 
+	public int save(Empleado t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO empleado"
-						+ "(cedula, nombre, apellidos, telefono, email)"
-						+ " VALUES (?, ?, ?, ?, ?)");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO empleado"
+																+ "(cedula, nombre, apellidos, telefono, email)"
+																+ " VALUES (?, ?, ?, ?, ?)");
 		
 		statement.setString(1, t.getCedula());
 		statement.setString(2, t.getNombre());
@@ -71,17 +70,16 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		int affectedRows = statement.executeUpdate();
 
 
-		return affectedRows > 0;
+		return affectedRows;
 		
 	}
 
 	@Override
-	public boolean update(Empleado t) throws Exception 
+	public int update(Empleado t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
-						+ "SET nombre=?, apellidos=?, telefono=?, email=?"
-						+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE empleado "
+																+ "SET nombre=?, apellidos=?, telefono=?, email=?"
+																+ " WHERE cedula=?");
 
 		statement.setString(1, t.getNombre());		
 		statement.setString(2, t.getApellidos());
@@ -89,21 +87,20 @@ public class EmpleadoDAOImpl implements DAO<Empleado>
 		statement.setString(4, t.getEmail());
 		statement.setString(5, t.getCedula());
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(Empleado t) throws Exception 
+	public int delete(Empleado t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE empleado "
-						+ "SET is_active=?"
-						+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE empleado "
+																+ "SET is_active=?"
+																+ " WHERE cedula=?");
 
 		statement.setBoolean(1, false);		
 		statement.setString(2, t.getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 	
 	private Empleado createEmpleado(ResultSet resultSet) throws SQLException

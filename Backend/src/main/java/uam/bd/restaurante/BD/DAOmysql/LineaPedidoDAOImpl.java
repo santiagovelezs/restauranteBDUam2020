@@ -61,10 +61,10 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 	}
 
 	@Override
-	public boolean save(LineaPedido t) throws Exception 
+	public int save(LineaPedido t) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO productos_pedido(id_pedido, id_producto, cantidad, valor_un)"
-																+ " VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+																+ " VALUES (?,?,?,?)");
 	        
 		statement.setInt(1, t.getIdPedido());
 		statement.setString(2, t.getIdProducto());
@@ -72,38 +72,52 @@ public class LineaPedidoDAOImpl implements DAO_Foreign<LineaPedido>
 		statement.setFloat(4, t.getValorUn());
 
 		int affectedRows = statement.executeUpdate();
-
-		ResultSet generatedKeys = statement.getGeneratedKeys();
-		generatedKeys.next();
-		t.setIdPedido(generatedKeys.getInt(1));
-
-		return affectedRows > 0;
+		
+		return affectedRows;
 	}
 
 	@Override
-	public boolean update(LineaPedido t) throws Exception 
+	public int update(LineaPedido t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE productos_pedido SET id_producto=?, cantidad=?, valor_un=? WHERE id_pedido=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE productos_pedido SET id_producto=?, cantidad=?, valor_un=? "
+																+ "WHERE id_pedido=?");
 
-		statement.setString(2, t.getIdProducto());
-		statement.setInt(3, t.getCantidad());
-		statement.setFloat(4, t.getValorUn());
+		statement.setString(1, t.getIdProducto());
+		statement.setInt(2, t.getCantidad());
+		statement.setFloat(3, t.getValorUn());
+		statement.setInt(3, t.getIdPedido());
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(LineaPedido t) throws Exception 
+	public int delete(LineaPedido t) throws Exception 
 	{
-		return false;
+
+		PreparedStatement statement = connection.prepareStatement("DELETE FROM productos_pedido "
+																+ " WHERE id_pedido = ? AND id_producto = ?");
+		statement.setInt(1, t.getIdPedido());	
+		statement.setString(2, t.getIdProducto());	
+
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public List<LineaPedido> getAllById(int id) throws Exception 
+	public List<LineaPedido> getAllById(String id) throws Exception 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<LineaPedido> elements = new ArrayList<>();
+        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos_pedido WHERE id_pedido = ?");
+        statement.setString(1, id);	        
+        ResultSet resultSet = statement.executeQuery();
+        
+        while(resultSet.next())
+        {
+        	LineaPedido lineaPedido = createLineaPedido(resultSet);        	          
+            elements.add(lineaPedido);
+        }
+        
+        return elements;
 	}
 	 
 	private LineaPedido createLineaPedido(ResultSet resultSet) throws Exception 

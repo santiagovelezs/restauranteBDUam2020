@@ -55,42 +55,40 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 	}
 
 	@Override
-	public boolean save(Usuario t) throws Exception 
+	public int save(Usuario t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO usuario(id_empleado, password)"
-						+ " VALUES (?, ?)");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO usuario(id_empleado, password)"
+																+ " VALUES (?, ?)");
 		
 		statement.setString(1, t.getCedula());		
 		statement.setString(2, t.getPassword());
 
 		int affectedRows = statement.executeUpdate();
 
-		return affectedRows > 0;
+		return affectedRows;
 	}
 
 	@Override
-	public boolean update(Usuario t) throws Exception 
+	public int update(Usuario t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE usuario SET password=? "
-								+ "WHERE id_empleado=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE usuario SET password=? "
+																+ "WHERE id_empleado=?");
 
 		statement.setString(1, t.getPassword());		
 		statement.setString(2, t.getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(Usuario t) throws Exception 
+	public int delete(Usuario t) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("UPDATE usuario SET is_active=?"
 																+ " WHERE id_empleado=?");
 		statement.setBoolean(1, false);		
 		statement.setString(2, t.getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 	
 	private Usuario createUsuario(ResultSet resultSet) throws SQLException
@@ -107,5 +105,4 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 
         return usuario;
     }
-
 }

@@ -8,9 +8,9 @@ public interface DAO<T>
 
     T getBy(String id) throws Exception;
 
-    boolean save(T t) throws Exception;
+    int save(T t) throws Exception;
 
-    boolean update(T t) throws Exception;
+    int update(T t) throws Exception;
 
-    boolean delete(T t) throws Exception;
+    int delete(T t) throws Exception;
 }

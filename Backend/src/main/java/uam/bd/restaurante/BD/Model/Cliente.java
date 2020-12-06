@@ -8,7 +8,12 @@ public class Cliente extends Persona
 	{
 		super(cedula, nombre, apellidos, email, telefono, is_active);
 		this.direccion=direccion;
-	}	
+	}
+	
+	public Cliente(String cedula)
+	{
+		super(cedula);		
+	}
 	
 	public String getDireccion() 
 	{

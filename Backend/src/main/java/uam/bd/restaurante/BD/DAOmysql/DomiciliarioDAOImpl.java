@@ -29,8 +29,8 @@ public class DomiciliarioDAOImpl implements DAO<Domiciliario>
         
         while(resultSet.next())
         {
-        	Domiciliario repartidor = createDomiciliario(resultSet);        	          
-            elements.add(repartidor);
+        	Domiciliario domiciliario = createDomiciliario(resultSet);        	          
+            elements.add(domiciliario);
         }
         
         return elements;
@@ -55,7 +55,7 @@ public class DomiciliarioDAOImpl implements DAO<Domiciliario>
 	}
 
 	@Override
-	public boolean save(Domiciliario t) throws Exception 
+	public int save(Domiciliario t) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO domiciliario(cedula, nombre, apellidos, telefono, email)"
 																+ " VALUES (?, ?, ?, ?, ?)");
@@ -68,15 +68,14 @@ public class DomiciliarioDAOImpl implements DAO<Domiciliario>
 
 		int affectedRows = statement.executeUpdate();
 
-		return affectedRows > 0;
+		return affectedRows;
 	}
 
 	@Override
-	public boolean update(Domiciliario t) throws Exception 
+	public int update(Domiciliario t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE domiciliario SET nombre=?, apellidos=?, telefono=?, email=?"
-								+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE domiciliario SET nombre=?, apellidos=?, telefono=?, email=?"
+																+ " WHERE cedula=?");
 
 		statement.setString(1, t.getNombre());		
 		statement.setString(2, t.getApellidos());
@@ -84,21 +83,20 @@ public class DomiciliarioDAOImpl implements DAO<Domiciliario>
 		statement.setString(4, t.getEmail());
 		statement.setString(5, t.getCedula());
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(Domiciliario t) throws Exception 
+	public int delete(Domiciliario t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE domiciliario "
-						+ "SET is_active=?"
-						+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE domiciliario "
+																+ "SET is_active=?"
+																+ " WHERE cedula=?");
 
 		statement.setBoolean(1, false);		
 		statement.setString(2, t.getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 	
 	private Domiciliario createDomiciliario(ResultSet resultSet) throws SQLException

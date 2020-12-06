@@ -56,12 +56,11 @@ public class ClienteDAOImpl implements DAO<Cliente>
 	}
 
 	@Override
-	public boolean save(Cliente t) throws Exception 
+	public int save(Cliente t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO cliente"
-						+ "(cedula, nombre, apellidos, direccion, telefono, email)"
-						+ " VALUES (?, ?, ?, ?, ?, ?)");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente"
+																+ "(cedula, nombre, apellidos, direccion, telefono, email)"
+																+ " VALUES (?, ?, ?, ?, ?, ?)");
 		
 		statement.setString(1, t.getCedula());
 		statement.setString(2, t.getNombre());
@@ -72,16 +71,15 @@ public class ClienteDAOImpl implements DAO<Cliente>
 
 		int affectedRows = statement.executeUpdate();
 
-		return affectedRows > 0;
+		return affectedRows;
 	}
 
 	@Override
-	public boolean update(Cliente t) throws Exception 
+	public int update(Cliente t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE cliente "
-						+ "SET nombre=?, apellidos=?, telefono=?, email=?"
-						+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE cliente "
+																+ "SET nombre=?, apellidos=?, telefono=?, email=?"
+																+ " WHERE cedula=?");
         
 		statement.setString(1, t.getNombre());		
 		statement.setString(2, t.getApellidos());
@@ -89,21 +87,20 @@ public class ClienteDAOImpl implements DAO<Cliente>
 		statement.setString(4, t.getEmail());
 		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(Cliente t) throws Exception 
+	public int delete(Cliente t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE cliente "
-						+ "SET is_active=?"
-						+ " WHERE cedula=?");
+		PreparedStatement statement = connection.prepareStatement("UPDATE cliente "
+																+ "SET is_active=?"
+																+ " WHERE cedula=?");
 
 		statement.setBoolean(1, false);		
 		statement.setString(2, t.getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 	
 	private Cliente createCliente(ResultSet resultSet) throws SQLException

@@ -6,6 +6,14 @@ public class Estado
 	
 	private String nombre;
 	
+	public static final int EN_PREPARACION = 1;
+	
+	public static final int EN_REPARTO = 2;
+	
+	public static final int ENTREGADO = 3;
+	
+	public static final int CANCELADO = 4;
+	
 	public Estado(int numero, String nombre)
 	{
 		this.numero = numero;

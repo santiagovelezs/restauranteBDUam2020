@@ -10,6 +10,11 @@ public class LineaPedido
 	
 	private float valorUn;
 	
+	public LineaPedido()
+	{
+		
+	}
+	
 	public LineaPedido(int idPedido, Producto producto, int cantidad, float valorUn)
 	{
 		this.idPedido = idPedido;
@@ -17,6 +22,13 @@ public class LineaPedido
 		this.cantidad = cantidad;
 		this.valorUn = valorUn;
 	}
+	
+	public LineaPedido(Producto producto, int cantidad, float valorUn)
+	{		
+		this.producto = producto;
+		this.cantidad = cantidad;
+		this.valorUn = valorUn;
+	}	
 	
 	public int getIdPedido() 
 	{
@@ -67,5 +79,11 @@ public class LineaPedido
 	{
 		return producto.getCodigo();
 	}   
+	
+	@Override
+	public String toString() 
+	{
+		return "\nIdPedido: "+this.getIdPedido()+"\nProducto: "+this.getProducto()+"\nCantidad : "+this.getCantidad()+"\nValorUn: "+this.getValorUn();
+	}
     
 }

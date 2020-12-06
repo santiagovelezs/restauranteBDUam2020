@@ -32,7 +32,7 @@ public class UsuarioController
 	{			
 		try 
 		{
-			return usuarioDAO.save(t);
+			return usuarioDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
@@ -64,7 +64,7 @@ public class UsuarioController
 	{
 		try 
 		{
-			return usuarioDAO.delete(t);
+			return usuarioDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +77,7 @@ public class UsuarioController
 	{
 		try
 		{
-			return usuarioDAO.update(t);
+			return usuarioDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{

@@ -58,22 +58,21 @@ public class EnvioDAOImpl implements DAO_Foreign<Envio>
 	}
 
 	@Override
-	public boolean save(Envio t) throws Exception 
+	public int save(Envio t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO envio(fecha, domiciliario)"
-						+ " VALUES (?, ?)");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO envio(fecha, domiciliario)"
+																+ " VALUES (?, ?)");
 		
 		statement.setTimestamp(1, t.getFecha());		
 		statement.setString(2, t.getDomiciliario().getCedula());
 
 		int affectedRows = statement.executeUpdate();
 
-		return affectedRows > 0;
+		return affectedRows;
 	}
 
 	@Override
-	public boolean update(Envio t) throws Exception 
+	public int update(Envio t) throws Exception 
 	{
 		PreparedStatement statement = connection.prepareStatement("UPDATE envio SET fecha=?, domiciliario=? "
 																+ "WHERE numero=?");
@@ -81,21 +80,36 @@ public class EnvioDAOImpl implements DAO_Foreign<Envio>
 		statement.setTimestamp(1, t.getFecha());		
 		statement.setString(2, t.getDomiciliario().getCedula());		
 
-		return statement.executeUpdate() > 0;
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public boolean delete(Envio t) throws Exception 
+	public int delete(Envio t) throws Exception 
 	{
-		// TODO Auto-generated method stub
-		return false;
+
+		PreparedStatement statement = connection.prepareStatement("DELETE FROM envio "
+																+ " WHERE numero=?");
+		statement.setInt(1, t.getNumero());			
+
+		return statement.executeUpdate();
 	}
 
 	@Override
-	public List<Envio> getAllById(int id) throws Exception 
+	public List<Envio> getAllById(String id) throws Exception 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Envio> elements = new ArrayList<>();
+        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM envio WHERE domiciliario = ?");
+        statement.setString(1, id);	        
+        ResultSet resultSet = statement.executeQuery();
+        
+        while(resultSet.next())
+        {
+        	Envio envio = createEnvio(resultSet);        	          
+            elements.add(envio);
+        }
+        
+        return elements;
 	}
 	
 	private Envio createEnvio(ResultSet resultSet) throws Exception 

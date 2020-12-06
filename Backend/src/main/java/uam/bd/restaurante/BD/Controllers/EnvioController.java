@@ -32,7 +32,7 @@ public class EnvioController
 	{			
 		try 
 		{
-			return envioDAO.save(t);
+			return envioDAO.save(t) > 0;
 		} 
 		catch (DataIntegrityViolationException e) 
 		{
@@ -64,7 +64,7 @@ public class EnvioController
 	{
 		try 
 		{
-			return envioDAO.delete(t);
+			return envioDAO.delete(t) > 0;
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +77,7 @@ public class EnvioController
 	{
 		try
 		{
-			return envioDAO.update(t);
+			return envioDAO.update(t) > 0;
 		}
 		catch(Exception e)
 		{
