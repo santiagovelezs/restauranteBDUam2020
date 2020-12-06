@@ -10,8 +10,9 @@ import java.util.List;
 import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.Model.Repartidor;
 
-public class RepartidorDAOImpl implements DAO<Repartidor>{
-private final Connection connection;
+public class RepartidorDAOImpl implements DAO<Repartidor>
+{
+	private final Connection connection;
 	
 	public RepartidorDAOImpl(Connection connection)
 	{
@@ -56,10 +57,8 @@ private final Connection connection;
 	@Override
 	public boolean save(Repartidor t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO domiciliario"
-						+ "(cedula, nombre, apellidos, telefono, email)"
-						+ " VALUES (?, ?, ?, ?, ?)");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO domiciliario(cedula, nombre, apellidos, telefono, email)"
+																+ " VALUES (?, ?, ?, ?, ?)");
 		
 		statement.setString(1, t.getCedula());
 		statement.setString(2, t.getNombre());
@@ -76,9 +75,8 @@ private final Connection connection;
 	public boolean update(Repartidor t) throws Exception 
 	{
 		PreparedStatement statement = connection
-				.prepareStatement("UPDATE domiciliario "
-						+ "SET nombre=?, apellidos=?, telefono=?, email=?"
-						+ " WHERE cedula=?");
+				.prepareStatement("UPDATE domiciliario SET nombre=?, apellidos=?, telefono=?, email=?"
+								+ " WHERE cedula=?");
 
 		statement.setString(1, t.getNombre());		
 		statement.setString(2, t.getApellidos());

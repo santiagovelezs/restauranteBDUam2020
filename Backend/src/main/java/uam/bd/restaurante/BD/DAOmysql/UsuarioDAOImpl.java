@@ -86,11 +86,8 @@ public class UsuarioDAOImpl implements DAO<Usuario>
 	@Override
 	public boolean delete(Usuario t) throws Exception 
 	{
-		PreparedStatement statement = connection
-				.prepareStatement("UPDATE usuario "
-						+ "SET is_active=?"
-						+ " WHERE id_empleado=?");
-
+		PreparedStatement statement = connection.prepareStatement("UPDATE usuario SET is_active=?"
+																+ " WHERE id_empleado=?");
 		statement.setBoolean(1, false);		
 		statement.setString(2, t.getCedula());		
 
