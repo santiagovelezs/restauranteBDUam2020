@@ -1,5 +1,6 @@
 package uam.bd.restaurante.BD.Controllers;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import uam.bd.restaurante.BD.DAO.DAO;
 import uam.bd.restaurante.BD.DAOmysql.UsuarioDAOImpl;
 import uam.bd.restaurante.BD.Model.Usuario;
 import uam.bd.restaurante.BD.MysqlConnector.DBConnection;
+import uam.bd.restaurante.BD.dto.JToken;
 
 @RestController
 public class UsuarioController 
@@ -44,6 +46,11 @@ public class UsuarioController
 			t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
 			return usuarioDAO.save(t) > 0;
 		} 
+		catch(SQLIntegrityConstraintViolationException e)
+		{
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Esta Cedula No existe", e);
+		}
 		catch (DataIntegrityViolationException e) 
 		{
 			e.printStackTrace();
@@ -98,15 +105,33 @@ public class UsuarioController
 	}
 	
 	@PostMapping("/login")		
-	public String login(@RequestBody Usuario t)
-	{		
+	public JToken login(@RequestBody Usuario t) throws Exception
+	{
+		System.out.println("Userrrrrr:");
+		System.out.println("User T: "+t.getCedula());
 		try 
-		{			
-			return JwtTokenService.generateToken(t);
+		{
+			Usuario user = usuarioDAO.getBy(t.getCedula());
+			System.out.println("Password: "+t.getPassword());
+			boolean match = bCryptPasswordEncoder.matches(t.getPassword(), user.getPassword());
+			if(match)
+			{
+				String token = JwtTokenService.generateToken(t);
+				System.out.println("Token: "+token);
+				return new JToken(token);
+				//return token;
+			}
+			else
+			{
+				//return null;
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Password incorrecto !");
+			}
+				
 		} 
 		catch (Exception e) 
-		{			
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error, Exception ", e);
+		{
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password incorrecto", e);
 		}		
 	}
 	

@@ -8,6 +8,16 @@ public class Empleado extends Persona
 		super(cedula, nombre, apellidos, email, telefono, is_active);
 	}
 	
+	public Empleado(String cedula)
+	{
+		super(cedula);
+	}
+	
+	public Empleado( )
+	{
+		super();
+	}
+	
 	public String getCedula() 
 	{
 		return cedula;

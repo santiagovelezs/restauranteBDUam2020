@@ -9,6 +9,7 @@ import { PanelPedidosComponent } from './components/pedidos/panel-pedidos/panel-
 import { PanelClientesComponent } from './components/clientes/panel-clientes/panel-clientes.component';
 import { PanelEmpleadosComponent } from './components/empleados/panel-empleados/panel-empleados.component';
 import { PanelUsuariosComponent } from './components/usuarios/panel-usuarios/panel-usuarios.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PanelUsuariosComponent } from './components/usuarios/panel-usuarios/pan
     PanelPedidosComponent,
     PanelClientesComponent,
     PanelEmpleadosComponent,
-    PanelUsuariosComponent
+    PanelUsuariosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

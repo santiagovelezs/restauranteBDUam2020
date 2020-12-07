@@ -10,6 +10,17 @@ public class Usuario extends Empleado
 		this.password = password;
 	}
 	
+	public Usuario(String cedula, String password)
+	{
+		super(cedula);		
+		this.password = password;
+	}
+	
+	public Usuario()
+	{
+		super();
+	}
+	
 	public String getPassword()
 	{
 		return this.password;

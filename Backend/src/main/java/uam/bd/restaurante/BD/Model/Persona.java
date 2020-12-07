@@ -23,4 +23,8 @@ public abstract class Persona
 	{
 		this.cedula = cedula;
 	}
+	
+	public Persona( )
+	{		
+	}
 }
