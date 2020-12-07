@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-order',
@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NewOrderComponent implements OnInit 
 {
-  formUsuario: FormGroup
+  formPedido: FormGroup
 
   constructor() { }
 
@@ -19,10 +19,20 @@ export class NewOrderComponent implements OnInit
 
   private buildFormUsuario()
   {
-    this.formUsuario = new FormGroup({
-      cedula: new FormControl('', [Validators.required]),      
-      password: new FormControl('', [Validators.required])      
+    this.formPedido = new FormGroup({
+      cliente: new FormArray([
+        new FormControl('', [Validators.required])
+      ])      
     })
+  }
+
+  private builtForm() {
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      telefonos: new FormArray([
+        new FormControl('', [Validators.required])
+      ])
+    });
   }
 
 }
